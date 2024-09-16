@@ -6,6 +6,7 @@ import './style.css'
 
 function Login() {
     const navigate = useNavigate();
+    
     const [inputValue, setInputValue] = useState({
         email: "",
         password: "",
@@ -45,7 +46,7 @@ function Login() {
             if(success){
                 handleSuccess(message);
                 setTimeout(() => {
-                    navigate("/");
+                    navigate(window.location.href = 'http://localhost:3001/');
                 }, 1000);
             } else{
                 handleError(message);
@@ -80,7 +81,7 @@ function Login() {
 
                 <button type='submit'>Submit</button>
                  <span>
-                    Already have an account? <Link to={"/signup"}>Signup</Link>
+                    Don't have an account? <Link to={"/signup"}> Signup</Link>
                  </span>
             </form>
             <ToastContainer/>

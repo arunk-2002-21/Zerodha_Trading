@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 8080
 const url = process.env.MONGO_URL;
 
 const app = express();
+app.use(express.json());
+
 mongoose.connect(url).then(() =>{
     console.log("DB connection successful")
 }).catch((err) => {
@@ -20,7 +22,7 @@ mongoose.connect(url).then(() =>{
 });
 
 app.use(cors({
-    origin: ["http://localhost:8080"],
+    origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }));
@@ -29,7 +31,7 @@ app.use(bodyParser.json());
 
 app.use(cookieParser());
 
-app.use(express.json());
+
 
 app.use("/", authRoute);
 
@@ -208,6 +210,7 @@ app.get('/allPositions', async (req, res) => {
     let allPositions = await PositionsModel.find({});
     res.json(allPositions);
 });
+
 
 app.listen(PORT, () =>{
     console.log(`server is listening on port 8080`)
